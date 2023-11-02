@@ -2,6 +2,10 @@
 
 Parse YAML files with SnakeYAML the easy way.
 
+## Dependencies
+
+- SnakeYAML
+
 ## `new Parser(java.nio.file.Path.Pah)`
 
 ```java
