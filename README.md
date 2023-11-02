@@ -30,7 +30,7 @@ Works for: `Parser.AsInt`, `Parser.AsLong`, `Parser.AsDouble`
 
 File Example:
 
-```
+```yaml
 databases:
   type: "mongodb"
   details:
@@ -39,7 +39,7 @@ databases:
 
 Code Example:
 
-```
+```java
 final Parser YParser = new Parser(java.nio.file.Paths.get("path/to/mny/yaml/file"));
 System.out.println(YParser.AsString("databases.type", Parser.RETURN_NULL_ON_EXCEPTION));
 System.out.println(YParser.AsString("databases.details.uri", Parser.RETURN_NULL_ON_EXCEPTION));
