@@ -77,9 +77,9 @@ public class Parser {
                     LastData = (Map<String, Object>) LastData.get(Part);
                 }
             }
-            return boolean;
+            return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
+            return false
             throw new Exception(E);
         }
     }
