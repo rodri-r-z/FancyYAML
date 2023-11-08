@@ -61,6 +61,29 @@ public class Parser {
         }
     }
 
+    public boolean AsBoolean(final String Path, int... Modifier) throws Exception {
+        try {
+            final Yaml Parser = new Yaml();
+            final String[] Parts = Path.split("\\.");
+            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
+            if (Parts.length == 1) return (boolean) AllData.get(Parts[0]);
+            Map<String, Object> LastData = AllData;
+            boolean FinalData = false;
+            for ( int i = 0; i < Parts.length; i++ ) {
+                final String Part = Parts[i];
+                if ( i + 1 ==  Parts.length ) {
+                    FinalData = (boolean) LastData.get(Part);
+                } else {
+                    LastData = (Map<String, Object>) LastData.get(Part);
+                }
+            }
+            return boolean;
+        } catch (Exception E) {
+            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
+            throw new Exception(E);
+        }
+    }
+
     public ArrayList<String> AsStringList(final String Path,int... Modifier) throws Exception {
         try {
             final Yaml Parser = new Yaml();
