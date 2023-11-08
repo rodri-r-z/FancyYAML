@@ -79,8 +79,7 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            return false
-            throw new Exception(E);
+            return false;
         }
     }
 
