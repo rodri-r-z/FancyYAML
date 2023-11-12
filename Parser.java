@@ -37,6 +37,50 @@ public class Parser {
         }
     }
 
+    public Map<String, Object> RawGet(String Path) throws Exception {
+        try {
+            final Yaml Parser = new Yaml();
+            final String[] Parts = Path.split("\\.");
+            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
+            if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
+            Map<String, Object> LastData = AllData;
+            Map<String, Object> FinalData = null;
+            for ( int i = 0; i < Parts.length; i++ ) {
+                final String Part = Parts[i];
+                if ( i + 1 ==  Parts.length ) {
+                    FinalData = (Map<String, Object>) LastData.get(Part);
+                } else {
+                    LastData = (Map<String, Object>) LastData.get(Part);
+                }
+            }
+            return FinalData;
+        } catch (Exception E) {
+            throw new Exception(E);
+        }
+    }
+
+    public Object AsObject(String Path) throws Exception {
+        try {
+            final Yaml Parser = new Yaml();
+            final String[] Parts = Path.split("\\.");
+            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
+            if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
+            Map<String, Object> LastData = AllData;
+            Object FinalData = null;
+            for ( int i = 0; i < Parts.length; i++ ) {
+                final String Part = Parts[i];
+                if ( i + 1 ==  Parts.length ) {
+                    FinalData = (Object) LastData.get(Part);
+                } else {
+                    LastData = (Map<String, Object>) LastData.get(Part);
+                }
+            }
+            return FinalData;
+        } catch (Exception E) {
+            throw new Exception(E);
+        }
+    }
+
     public ArrayList AsArrayList(final String Path, int... Modifier) throws Exception {
         try {
             final Yaml Parser = new Yaml();
