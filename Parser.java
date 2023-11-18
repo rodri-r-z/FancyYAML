@@ -7,8 +7,11 @@ import java.util.Map;
 
 public class Parser {
     private final Path Path;
-    public Parser(final Path Path) {
+    private Map<String, Object> AllData = null;
+    public Parser(final Path Path) throws Exception {
         this.Path = Path;
+        final Yaml Parser = new Yaml();
+        this.AllData = Parser.load(new FileInputStream(this.Path.toString()));
     }
 
     public static int RETURN_NULL_ON_EXCEPTION = 4902;
@@ -16,9 +19,7 @@ public class Parser {
 
     public String AsString(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
             if (Parts.length == 1) return (String) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             String FinalData = null;
@@ -39,9 +40,7 @@ public class Parser {
 
     public Map<String, Object> RawGet(String Path) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
             if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             Map<String, Object> FinalData = null;
@@ -61,9 +60,7 @@ public class Parser {
 
     public Object AsObject(String Path) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
             if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             Object FinalData = null;
@@ -83,10 +80,7 @@ public class Parser {
 
     public ArrayList AsArrayList(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (ArrayList) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             ArrayList FinalData = null;
@@ -107,9 +101,7 @@ public class Parser {
 
     public boolean AsBoolean(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));;
             if (Parts.length == 1) return (boolean) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             boolean FinalData = false;
@@ -129,10 +121,7 @@ public class Parser {
 
     public ArrayList<String> AsStringList(final String Path,int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (ArrayList<String>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             ArrayList<String> FinalData = null;
@@ -153,10 +142,7 @@ public class Parser {
 
     public ArrayList<Integer> AsIntegerList(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (ArrayList<Integer>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             ArrayList<Integer> FinalData = null;
@@ -177,10 +163,7 @@ public class Parser {
 
     public ArrayList<Double> AsDoubleList(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (ArrayList<Double>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             ArrayList<Double> FinalData = null;
@@ -201,10 +184,7 @@ public class Parser {
 
     public ArrayList<Long> AsLongList(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (ArrayList<Long>) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             ArrayList<Long> FinalData = null;
@@ -225,10 +205,7 @@ public class Parser {
 
     public int AsInt(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (int) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             int FinalData = 0;
@@ -249,10 +226,7 @@ public class Parser {
 
     public long AsLong(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (long) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             long FinalData = 0;
@@ -273,10 +247,7 @@ public class Parser {
 
     public double AsDouble(final String Path, int... Modifier) throws Exception {
         try {
-            final Yaml Parser = new Yaml();
             final String[] Parts = Path.split("\\.");
-            Map<String, Object> AllData = Parser.load(new FileInputStream(this.Path.toString()));
-            ;
             if (Parts.length == 1) return (double) AllData.get(Parts[0]);
             Map<String, Object> LastData = AllData;
             double FinalData = 0;
