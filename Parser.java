@@ -1,6 +1,7 @@
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,16 +9,18 @@ import java.util.Map;
 public class Parser {
     private final Path Path;
     private Map<String, Object> AllData = null;
-    public Parser(final Path Path) throws Exception {
+    public Parser(final Path Path) throws FileNotFoundException {
         this.Path = Path;
         final Yaml Parser = new Yaml();
         this.AllData = Parser.load(new FileInputStream(this.Path.toString()));
     }
 
+    @Deprecated
     public static int RETURN_NULL_ON_EXCEPTION = 4902;
+    @Deprecated
     public static int RETURN_0_ON_EXCEPTION = 9152;
 
-    public String AsString(final String Path, int... Modifier) throws Exception {
+    public String AsString(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (String) AllData.get(Parts[0]);
@@ -33,12 +36,11 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 
-    public Map<String, Object> RawGet(String Path) throws Exception {
+    public Map<String, Object> RawGet(String Path) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
@@ -54,11 +56,11 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 
-    public Object AsObject(String Path) throws Exception {
+    public Object AsObject(String Path) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (Map<String, Object>) AllData.get(Parts[0]);
@@ -74,11 +76,11 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 
-    public ArrayList AsArrayList(final String Path, int... Modifier) throws Exception {
+    public ArrayList AsArrayList(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (ArrayList) AllData.get(Parts[0]);
@@ -94,12 +96,12 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            
+            throw new RuntimeException(E);
         }
     }
 
-    public boolean AsBoolean(final String Path, int... Modifier) throws Exception {
+    public boolean AsBoolean(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (boolean) AllData.get(Parts[0]);
@@ -119,7 +121,7 @@ public class Parser {
         }
     }
 
-    public ArrayList<String> AsStringList(final String Path,int... Modifier) throws Exception {
+    public ArrayList<String> AsStringList(final String Path,int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (ArrayList<String>) AllData.get(Parts[0]);
@@ -135,12 +137,12 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            
+            throw new RuntimeException(E);
         }
     }
 
-    public ArrayList<Integer> AsIntegerList(final String Path, int... Modifier) throws Exception {
+    public ArrayList<Integer> AsIntegerList(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (ArrayList<Integer>) AllData.get(Parts[0]);
@@ -156,12 +158,12 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            
+            throw new RuntimeException(E);
         }
     }
 
-    public ArrayList<Double> AsDoubleList(final String Path, int... Modifier) throws Exception {
+    public ArrayList<Double> AsDoubleList(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (ArrayList<Double>) AllData.get(Parts[0]);
@@ -177,12 +179,12 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            
+            throw new RuntimeException(E);
         }
     }
 
-    public ArrayList<Long> AsLongList(final String Path, int... Modifier) throws Exception {
+    public ArrayList<Long> AsLongList(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (ArrayList<Long>) AllData.get(Parts[0]);
@@ -198,12 +200,12 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_NULL_ON_EXCEPTION) return null;
-            throw new Exception(E);
+            
+            throw new RuntimeException(E);
         }
     }
 
-    public int AsInt(final String Path, int... Modifier) throws Exception {
+    public int AsInt(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (int) AllData.get(Parts[0]);
@@ -219,12 +221,11 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_0_ON_EXCEPTION) return 0;
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 
-    public long AsLong(final String Path, int... Modifier) throws Exception {
+    public long AsLong(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (long) AllData.get(Parts[0]);
@@ -240,12 +241,11 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_0_ON_EXCEPTION) return 0;
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 
-    public double AsDouble(final String Path, int... Modifier) throws Exception {
+    public double AsDouble(final String Path, int... Modifier) {
         try {
             final String[] Parts = Path.split("\\.");
             if (Parts.length == 1) return (double) AllData.get(Parts[0]);
@@ -261,8 +261,7 @@ public class Parser {
             }
             return FinalData;
         } catch (Exception E) {
-            if (Modifier.length > 0 && Modifier[0] == RETURN_0_ON_EXCEPTION) return 0;
-            throw new Exception(E);
+            throw new RuntimeException(E);
         }
     }
 }
